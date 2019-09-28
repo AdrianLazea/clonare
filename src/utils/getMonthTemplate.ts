@@ -5,7 +5,7 @@ export default function(
   firstDay: number,
   numberOfDays: number,
   currentDay: number
-): String {
+): string {
   let monthStarted = false;
   let daysCount = 1;
   let monthTemplate = "";
