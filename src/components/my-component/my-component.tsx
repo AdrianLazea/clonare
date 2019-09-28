@@ -36,6 +36,7 @@ export class MyComponent {
   ];
   @State() monthTemplate: any;
   @State() selectedDate: string;
+  @State() isDatePickerVisible: boolean = false;
 
   componentWillLoad() {
     const date = new Date();
@@ -97,14 +98,29 @@ export class MyComponent {
   selectDay(day: number) {
     this.currentDay = day;
     this.formatSelectedDate();
+    this.toggleDatePicker();
+  }
+
+  toggleDatePicker() {
+    this.isDatePickerVisible = !this.isDatePickerVisible;
   }
 
   render() {
     this.buildMonthTemplate();
     return (
       <div class="date-picker-wrapper">
-        <input type="text" value={this.selectedDate} readOnly />
-        <div class="date-picker-select">
+        <input
+          type="text"
+          value={this.selectedDate}
+          onClick={this.toggleDatePicker.bind(this)}
+          readOnly
+        />
+        <div
+          class={
+            "date-picker-select " +
+            (this.isDatePickerVisible ? "visible" : "hidden")
+          }
+        >
           <div class="year">
             <button onClick={this.decrementYear.bind(this)}>prev</button>
             Year: <span>{this.currentYear}</span>
