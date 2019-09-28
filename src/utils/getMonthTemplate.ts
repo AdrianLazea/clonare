@@ -1,14 +1,14 @@
-// Function that returns an html template for a month
+// Function that returns an array of day objects that can be read in the render of my-component
 // firstDay - eg: Mon = 1, Sunday = 7
 // numberOfDays - From 28 to 31
 export default function(
   firstDay: number,
   numberOfDays: number,
   currentDay: number
-): string {
+): any {
   let monthStarted = false;
   let daysCount = 1;
-  let monthTemplate = "";
+  const monthTemplateArray: Array<{ day: any }>[] = [];
 
   // sunday is 0
   if (firstDay === 0) {
@@ -21,16 +21,24 @@ export default function(
       if ((i + 1 !== firstDay && !monthStarted) || daysCount > numberOfDays) {
         // if the month hasn't started yet or the daysCount is bigger than the number of days in the month
         // just add an empty span
-        monthTemplate += "<span data-day='null' class='day empty'></span>";
+        const dayObject: any = {};
+        dayObject.day = null;
+        dayObject.isBreak = false;
+        monthTemplateArray.push(dayObject);
       } else {
         // else, add the day number in the span
-        monthTemplate += `<span data-day="${daysCount}" class='day ${
-          currentDay === daysCount ? "current" : ""
-        }'>${daysCount++}</span>`;
+        const dayObject: any = {};
+        dayObject.day = daysCount;
+        dayObject.isCurrent = currentDay === daysCount;
+        daysCount++;
+        monthTemplateArray.push(dayObject);
       }
     }
-    monthTemplate += `<br/>`;
+    const dayObject: any = {};
+    dayObject.day = null;
+    dayObject.isBreak = true;
+    monthTemplateArray.push(dayObject);
   }
 
-  return monthTemplate;
+  return monthTemplateArray;
 }
