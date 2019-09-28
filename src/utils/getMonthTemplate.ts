@@ -10,6 +10,11 @@ export default function(
   let daysCount = 1;
   let monthTemplate = "";
 
+  // sunday is 0
+  if (firstDay === 0) {
+    firstDay = 7;
+  }
+
   while (daysCount <= numberOfDays) {
     for (let i = 0; i < 7; i++) {
       if (i + 1 === firstDay && !monthStarted) monthStarted = true;
