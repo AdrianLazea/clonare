@@ -35,6 +35,7 @@ export class MyComponent {
     "Dec"
   ];
   @State() monthTemplate: string;
+  @State() selectedDate: string;
 
   componentWillLoad() {
     const date = new Date();
@@ -50,6 +51,15 @@ export class MyComponent {
     this.year
       ? (this.currentYear = this.year)
       : (this.currentYear = date.getFullYear());
+
+    this.formatSelectedDate();
+  }
+
+  // dd / mm / yyyy
+  formatSelectedDate() {
+    this.selectedDate = `${this.currentDay} / ${
+      this.months[this.currentMonth]
+    } / ${this.currentYear}`;
   }
 
   buildMonthTemplate() {
@@ -88,7 +98,7 @@ export class MyComponent {
     this.buildMonthTemplate();
     return (
       <div class="date-picker-wrapper">
-        <input type="text" value="" readOnly />
+        <input type="text" value={this.selectedDate} readOnly />
         <div class="date-picker-select">
           <div class="year">
             <button onClick={this.decrementYear.bind(this)}>prev</button>
