@@ -74,6 +74,16 @@ export class MyComponent {
     this.buildMonthTemplate();
   }
 
+  decrementMonth() {
+    this.currentMonth === 0 ? (this.currentMonth = 11) : this.currentMonth--;
+    this.buildMonthTemplate();
+  }
+
+  incrementMonth() {
+    this.currentMonth === 11 ? (this.currentMonth = 0) : this.currentMonth++;
+    this.buildMonthTemplate();
+  }
+
   render() {
     this.buildMonthTemplate();
     return (
@@ -86,9 +96,9 @@ export class MyComponent {
             <button onClick={this.incrementYear.bind(this)}>next</button>
           </div>
           <div class="month">
-            <button> prev</button>
+            <button onClick={this.decrementMonth.bind(this)}> prev</button>
             Month: <span>{this.months[this.currentMonth]}</span>
-            <button>next</button>
+            <button onClick={this.incrementMonth.bind(this)}>next</button>
           </div>
           <div class="week-days">
             <span>M</span>
