@@ -46,7 +46,7 @@ export class MyComponent {
       : (this.currentDay = date.getDate());
 
     this.month
-      ? (this.currentMonth = this.month)
+      ? (this.currentMonth = this.month - 1)
       : (this.currentMonth = date.getMonth());
 
     this.year
