@@ -2,7 +2,7 @@
 // year - eg: 2019
 // month - Jan = 0, Dec = 11;
 export default function(year: number, month: number): Object {
-  const firstDay = new Date(year, month, 1);
-  const numberOfDays = new Date(year, month + 1, 0);
+  const firstDay = new Date(year, month, 1).getDay();
+  const numberOfDays = new Date(year, month + 1, 0).getDate();
   return { firstDay, numberOfDays };
 }
