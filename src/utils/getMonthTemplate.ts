@@ -16,7 +16,7 @@ export default function(
       if ((i + 1 !== firstDay && !monthStarted) || daysCount > numberOfDays) {
         // if the month hasn't started yet or the daysCount is bigger than the number of days in the month
         // just add an empty span
-        monthTemplate += `<span data-day="null" class='day empty'></span>`;
+        monthTemplate += "<span data-day='null' class='day empty'></span>";
       } else {
         // else, add the day number in the span
         monthTemplate += `<span data-day="${daysCount}" class='day ${
