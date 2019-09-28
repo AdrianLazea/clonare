@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h, State } from "@stencil/core";
 import { getMonthData, getMonthTemplate } from "../../utils";
 
 @Component({
@@ -16,11 +16,11 @@ export class MyComponent {
   // day you can pass to the component
   @Prop() day: number;
 
-  private monthData: any;
-  private currentDay: number;
-  private currentMonth: number;
-  private currentYear: number;
-  private months: Array<String> = [
+  @State() monthData: any;
+  @State() currentDay: number;
+  @State() currentMonth: number;
+  @State() currentYear: number;
+  @State() months: Array<String> = [
     "Jan",
     "Feb",
     "Mar",
@@ -34,7 +34,7 @@ export class MyComponent {
     "Nov",
     "Dec"
   ];
-  private monthTemplate: string;
+  @State() monthTemplate: string;
 
   componentWillLoad() {
     const date = new Date();
@@ -50,17 +50,28 @@ export class MyComponent {
     this.year
       ? (this.currentYear = this.year)
       : (this.currentYear = date.getFullYear());
-
-    this.monthData = getMonthData(this.currentYear, this.currentMonth);
   }
 
   buildMonthTemplate() {
+    this.monthData = getMonthData(this.currentYear, this.currentMonth);
     const { firstDay, numberOfDays } = this.monthData;
     this.monthTemplate = getMonthTemplate(
       firstDay,
       numberOfDays,
       this.currentDay
     );
+  }
+
+  decrementYear() {
+    if (this.currentYear >= 1970) {
+      this.currentYear -= 1;
+    }
+    this.buildMonthTemplate();
+  }
+
+  incrementYear() {
+    this.currentYear += 1;
+    this.buildMonthTemplate();
   }
 
   render() {
@@ -70,9 +81,9 @@ export class MyComponent {
         <input type="text" value="" readOnly />
         <div class="date-picker-select">
           <div class="year">
-            <button> prev</button>
+            <button onClick={this.decrementYear.bind(this)}>prev</button>
             Year: <span>{this.currentYear}</span>
-            <button>next</button>
+            <button onClick={this.incrementYear.bind(this)}>next</button>
           </div>
           <div class="month">
             <button> prev</button>
