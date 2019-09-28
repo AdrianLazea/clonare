@@ -34,6 +34,7 @@ export class MyComponent {
     "Nov",
     "Dec"
   ];
+  private monthTemplate: string;
 
   componentWillLoad() {
     const date = new Date();
@@ -53,14 +54,17 @@ export class MyComponent {
     this.monthData = getMonthData(this.currentYear, this.currentMonth);
   }
 
-  render() {
+  buildMonthTemplate() {
     const { firstDay, numberOfDays } = this.monthData;
-    const monthTemplate = getMonthTemplate(
+    this.monthTemplate = getMonthTemplate(
       firstDay,
       numberOfDays,
       this.currentDay
     );
+  }
 
+  render() {
+    this.buildMonthTemplate();
     return (
       <div class="date-picker-wrapper">
         <input type="text" value="" readOnly />
@@ -84,7 +88,7 @@ export class MyComponent {
             <span>S</span>
             <span>S</span>
           </div>
-          <div innerHTML={monthTemplate}></div>
+          <div innerHTML={this.monthTemplate}></div>
         </div>
       </div>
     );
