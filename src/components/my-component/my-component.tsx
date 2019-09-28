@@ -121,43 +121,52 @@ export class MyComponent {
             (this.isDatePickerVisible ? "visible" : "hidden")
           }
         >
-          <div class="year">
+          <div class="year date-selectors">
             <button onClick={this.decrementYear.bind(this)}>prev</button>
-            Year: <span>{this.currentYear}</span>
+            <span>
+              Year:<span class="selected-data">{this.currentYear}</span>
+            </span>
             <button onClick={this.incrementYear.bind(this)}>next</button>
           </div>
-          <div class="month">
+          <div class="month date-selectors">
             <button onClick={this.decrementMonth.bind(this)}> prev</button>
-            Month: <span>{this.months[this.currentMonth]}</span>
+            <span>
+              Month:
+              <span class="selected-data">
+                {this.months[this.currentMonth]}
+              </span>
+            </span>
             <button onClick={this.incrementMonth.bind(this)}>next</button>
           </div>
-          <div class="week-days">
-            <span>M</span>
-            <span>T</span>
-            <span>W</span>
-            <span>T</span>
-            <span>F</span>
-            <span>S</span>
-            <span>S</span>
-          </div>
-          <div>
-            {this.monthTemplate.map(dayObject => {
-              if (dayObject.day) {
-                const cssClass = dayObject.isCurrent ? "day current" : "day";
-                return (
-                  <span
-                    onClick={() => this.selectDay(dayObject.day)}
-                    class={cssClass}
-                  >
-                    {dayObject.day}
-                  </span>
-                );
-              } else if (dayObject.isBreak) {
-                return <br />;
-              } else {
-                return <span class="day empty"></span>;
-              }
-            })}
+          <div class="days-wrapper">
+            <div class="week-days">
+              <span class="day header">M</span>
+              <span class="day header">T</span>
+              <span class="day header">W</span>
+              <span class="day header">T</span>
+              <span class="day header">F</span>
+              <span class="day header">S</span>
+              <span class="day header">S</span>
+            </div>
+            <div class="all-days">
+              {this.monthTemplate.map(dayObject => {
+                if (dayObject.day) {
+                  const cssClass = dayObject.isCurrent ? "day current" : "day";
+                  return (
+                    <span
+                      onClick={() => this.selectDay(dayObject.day)}
+                      class={cssClass}
+                    >
+                      {dayObject.day}
+                    </span>
+                  );
+                } else if (dayObject.isBreak) {
+                  return <br />;
+                } else {
+                  return <span class="day empty"></span>;
+                }
+              })}
+            </div>
           </div>
         </div>
       </div>

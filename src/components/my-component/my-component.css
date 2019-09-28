@@ -1,1 +1,85 @@
+.date-picker-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #102027;
+  position: relative;
+  padding: 1em;
+}
 
+input[type=text] {
+  width: 95%;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  padding: 0.5em 1em;
+  border: 1px solid #f57c00;
+  color: #62757f;
+  cursor: pointer;
+}
+
+input[type=text]:focus {
+  outline-color: #f57c00;
+}
+
+.date-picker-select {
+  width: 100%;
+  position: absolute;
+  top: 6em;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+}
+
+.date-picker-select.hidden {
+  display: none;
+}
+
+.date-selectors {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+  padding: 0.5em;
+
+}
+
+.selected-data {
+  padding: 0.3em;
+}
+
+.days-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.all-days,
+.week-days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100%/7 - 2px);
+  height: 50px;
+  text-align: right;
+  font-size: 1.5em;
+  border-bottom: 1px solid #f57c00;
+}
+
+.day.current,
+.selected-data,
+button {
+  color: #ffffff;
+  background: #f57c00;
+}
+
+.all-days .day:not(.empty) {
+  cursor: pointer;
+}
+
+button {
+  border: 0;
+}
