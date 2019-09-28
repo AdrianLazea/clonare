@@ -34,7 +34,7 @@ export class MyComponent {
     "Nov",
     "Dec"
   ];
-  @State() monthTemplate: string;
+  @State() monthTemplate: any;
   @State() selectedDate: string;
 
   componentWillLoad() {
@@ -94,6 +94,11 @@ export class MyComponent {
     this.buildMonthTemplate();
   }
 
+  selectDay(day: number) {
+    this.currentDay = day;
+    this.formatSelectedDate();
+  }
+
   render() {
     this.buildMonthTemplate();
     return (
@@ -119,7 +124,25 @@ export class MyComponent {
             <span>S</span>
             <span>S</span>
           </div>
-          <div innerHTML={this.monthTemplate}></div>
+          <div>
+            {this.monthTemplate.map(dayObject => {
+              if (dayObject.day) {
+                const cssClass = dayObject.isCurrent ? "day current" : "day";
+                return (
+                  <span
+                    onClick={() => this.selectDay(dayObject.day)}
+                    class={cssClass}
+                  >
+                    {dayObject.day}
+                  </span>
+                );
+              } else if (dayObject.isBreak) {
+                return <br />;
+              } else {
+                return <span class="day empty"></span>;
+              }
+            })}
+          </div>
         </div>
       </div>
     );
